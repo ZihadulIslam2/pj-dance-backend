@@ -16,11 +16,10 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:3001', 
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+  origin: '*', // Allow all origins (use cautiously in production)
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 }
-app.use(cors(corsOptions))
 
 // middlewares
 app.use(express.json());
@@ -47,11 +46,8 @@ app.use("*", (req, res) => {
   return res.status(404).json({ status: 404, message: "page not found" });
 });
 
+
 app.listen(PORT, () => {
-  dbConfig();
-  console.log(`Server running on port:${PORT}`);
-});
-
-module.exports = app;
-
-//Rizwan Amir Fahim
+  dbConfig()
+  console.log(`Server running on port:${PORT}`)
+})
